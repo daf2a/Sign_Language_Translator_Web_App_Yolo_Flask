@@ -1,0 +1,93 @@
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BISINDO Translator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Add this to the <head> section of your HTML file -->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+
+</head>
+<body class="flex justify-center h-screen bg-slate-900">
+    <div class="flex flex-col h-[50vh] items-center justify-center transition-bg fixed z-0 w-full -top-40">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="jumbo absolute -inset-[10px] opacity-30"></div>
+        </div>  
+    </div>
+    <div class="max-w-3xl w-full">
+        <div class="mt-48">
+          <h1 class="mb-2 text-4xl font-bold leading-none tracking-tight text-center md:text-5xl lg:text-8xl text-cyan-500">BISINDO</h1>
+          <h2 class="mb-4 text-4xl font-bold leading-none tracking-tight text-center md:text-5xl lg:text-6xl text-cyan-500">Sign Language Translation</h1>
+          <div class="flex gap-4 max-w-3xl mx-auto py-5">
+              <form id="urlForm" class="w-full">
+                  <input type="text" id="url" name="url" class="border text-white text-sm rounded-lg  block w-full p-3 bg-slate-800 border-slate-600 placeholder-slate-400 :text-white focus:ring-blue-500 focus:border-blue-50" placeholder="Enter your url link video here..." required>
+              </form>
+              <button id="start" type="button" onclick="startVideo()" class="text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center bg-pink-600 hover:bg-pink-700 focus:ring-pink-800">Stream</button>
+              <button id="start" type="button" onclick="startVideo()" class="text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Camera</button>
+          </div>
+        </div>
+        <div class="flex gap-4 max-w-3xl mx-auto">          
+            <div id="accordion-flush" data-accordion="collapse" data-active-classes="text-gray-900 dark:text-white" data-inactive-classes="text-gray-500 dark:text-gray-400" class="w-full">
+                <h2 id="accordion-flush-heading-1">
+                  <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-1" aria-expanded="false" aria-controls="accordion-flush-body-1">
+                    <span>How to use</span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                    </svg>
+                  </button>
+                </h2>
+                <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
+                  <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                    <p class="mb-1 text-gray-500 dark:text-gray-400">Put <a href="https://www.youtube.com/" class="text-blue-600 dark:text-blue-500 hover:underline">link youtube</a> video on the input bar for detection from youtube video</p>
+                    <p class="mb-2 text-gray-500 dark:text-gray-400 text-sm">Example Link BISINDO Tutorial : <span class="text-blue-600 dark:text-blue-500"> https://www.youtube.com/watch?v=mukNGgweHSI</span></p>
+                    <p class="text-gray-500 dark:text-gray-400">If you want to use camera, fill input bar with <span class="text-blue-600 dark:text-blue-500 hover:underline">'0'</span> for detection</p>
+                  </div>
+                </div>
+                <h2 id="accordion-flush-heading-2">
+                  <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+                    <span>Contributors</span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                    </svg>
+                  </button>
+                </h2>
+                <div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+                  <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                    <div class="text-gray-500 dark:text-gray-400 flex justify-between"><p><span class="text-blue-600 dark:text-blue-500">5025211015</span> Muhammad Daffa Ashdaqfillah</p><a href="https://github.com/daf2a" class="text-blue-600 dark:text-blue-500 hover:underline">Github Profile</a></div>
+                    <div class="text-gray-500 dark:text-gray-400 flex justify-between"><p><span class="text-blue-600 dark:text-blue-500">5025211015</span> Ulima Kultsum</p><a href="https://github.com/daf2a" class="text-blue-600 dark:text-blue-500 hover:underline">Github Profile</a></div>
+                    <div class="text-gray-500 dark:text-gray-400 flex justify-between"><p><span class="text-blue-600 dark:text-blue-500">5025211015</span> Nur Azizah</p><a href="https://github.com/daf2a" class="text-blue-600 dark:text-blue-500 hover:underline">Github Profile</a></div>
+                  </div>
+                </div>
+                <h2 id="accordion-flush-heading-3">
+                  <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+                    <span>Source Code</span>
+                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+                    </svg>
+                  </button>
+                </h2>
+                <div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+                  <div class="py-5 border-b border-gray-200 dark:border-gray-700">
+                    <a href="https://github.com/daf2a/BISINDO_Sign_Language_Translator_Web_App_Yolo_Flask.git" class="text-blue-600 dark:text-blue-500 hover:underline">Github Repository</a>
+                  </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+</html>

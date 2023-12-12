@@ -1,0 +1,112 @@
+{#L1 labels/object#}
+{#L2 Logo Detection#}
+{#L3 Text/OCR#}
+
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Live Object Detection</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+            crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='script.js') }}"></script>
+    <!-- Add this to the <head> section of your HTML file -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"/>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/fontawesome.min.css"
+          integrity="sha512-xX2rYBFJSj86W54Fyv1de80DWBq7zYLn2z0I9bIhQG+rxIF6XVJUpdGnsNHWRa6AvP89vtFupEPDP8eZAtu9qA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/brands.min.css"
+          integrity="sha512-OivR4OdSsE1onDm/i3J3Hpsm5GmOVvr9r49K3jJ0dnsxVzZgaOJ5MfxEAxCyGrzWozL9uJGKz6un3A7L+redIQ=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.0/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
+
+</head>
+<body class="bg-slate-900">
+    <div class="grid grid-cols-12 gap-4 m-8">
+        <div class="col-span-6">
+            <div class="container1" style="text-align: center;">
+                <div id="container">
+                    <img class="center" src="/video_feed" id="videoElement">
+                </div>
+            </div>
+            <div id="terminal" class="w-full"></div>
+        </div>
+        <div class="col-span-6 mx-2">
+            <div class="flex justify-between border-b border-gray-700 py-4 mt-10 mx-8 mb-4 ">
+                <h2 class="text-3xl font-bold leading-none tracking-tight md:text-4xl lg:text-5xl text-cyan-500 ">Video Stream</h1>
+                <button class="text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800" id="stop-button" type="button" onclick="stopProcess('Stop Request')">Back to Homepage</button>
+            </div>
+            <div class="mx-8 border-b border-gray-700">
+                <div class="flex gap-3 mb-4">
+                    <label class="switch">
+                        <input id="turn_off" value="1" name="turn_off" type="checkbox" onclick="toggleOffSwitch()"/>
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="turn_off" class="form-label text-cyan-500">Show Stream</label><br>
+                </div>
+                <div class="flex gap-3 mb-4">
+                    <label class="switch">
+                        <input id="run_detection" value="0" name="run_detection" type="checkbox"
+                               onclick="toggleDetSwitch()"/>
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="run_detection" class="form-label text-cyan-500">Run Detection</label><br>
+                </div>
+                <div class="flex gap-3 mb-4">
+                    <label class="switch">
+                        <input id="flip-horizontal" value="0" name="flip-horizontal" type="checkbox"
+                               onclick="toggleHSwitch()"/>
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="flip-horizontal" class="form-label text-cyan-500">Flip Horizontally</label><br>
+                </div>
+            </div>
+
+            <div class="mx-8 flex items-center content-center gap-3 justify-between py-4">
+                <form action="/" method="POST" style="text-align: center;" class="flex justify-between w-full">
+                    <label for="slider" class="form-label text-cyan-500">Confidence Threshold</label>
+                    <input type="range" id="slider" name="slider" min="50" max="100">
+                </form>
+                <input type="hidden" id="sliderValue" name="sliderValue" value="75">
+                <span class="rounded-lg py-2 px-3 bg-slate-800 mr-6 text-cyan-500" id="conf_display">75</span>
+            </div>
+
+            <div class="flex items-center content-start gap-4 border-b border-gray-700 py-4 mt-10 mx-8 mb-4">
+                <h2 class=" text-2xl font-semibold leading-none tracking-tight md:text-3xl lg:text-4xl text-cyan-500 ">Final Sentence</h1>
+                <span class="inline-block px-3 py-1 text-xs font-bold tracking-wide mt-2 text-gray-900 bg-blue-500 rounded-full">Collecting every 10 consecutive occurrences of the same word</span>
+            </div>
+
+            <div>
+                <p id="finalSentencePara" class="text-cyan-200 mx-8">
+                </p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

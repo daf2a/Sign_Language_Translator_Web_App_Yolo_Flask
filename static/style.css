@@ -1,0 +1,220 @@
+/* * Reset all elements */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+/* * HTML elements */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 1.5em;
+}
+
+
+/* * Local selectors */
+#container {
+    width: 100%;
+    height: 450px;
+    border: 5px #1C2637 solid;
+    background-color: #0F172A;
+    margin: 20px;
+    border-radius: 5px;
+}
+
+#videoElement {
+    height: 440px;
+    width: 100%;
+    background-color: #0F172A;
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#terminal {
+        border-radius: 5px;
+    border: 5px #1C2637 solid;
+    font-family: monospace;
+    font-size: 12px;
+    background-color: #0F172A;
+    height: 250px;
+    overflow-y: scroll;
+    margin: 20px;
+    padding: 10px;
+}
+
+#control {
+    margin-top: 40px;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #1C2637;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #0275d8;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #03DD6F;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #000000;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+    background-color: #1C2637;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+.container1 {
+    position: relative;
+    z-index: 0;
+}
+
+.overlay1 {
+    font-size: 13px;
+    position: absolute;
+    bottom: 0;
+    right: 80px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.overlay2 {
+    font-size: 13px;
+    position: absolute;
+    bottom: 25px;
+    right: 80px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.overlay3 {
+    font-size: 13px;
+    position: absolute;
+    bottom: 50px;
+    right: 80px;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.no-link {
+    color: inherit;
+    text-decoration: none;
+}
+
+button.frame {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*optional*/
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: darkred;
+    cursor: pointer;
+}
+
+@keyframes jumbo {
+    from {
+        background-position: 50% 50%, 50% 50%;
+    }
+    to {
+        background-position: 350% 50%, 350% 50%;
+    }
+}
+
+.jumbo {
+    --stripes: repeating-linear-gradient(
+        100deg,
+        #0f172a 0%,
+        #0f172a 7%,
+        transparent 10%,
+        transparent 12%,
+        #0f172a 16%
+    );
+    --stripesDark: repeating-linear-gradient(
+        100deg,
+        #0f172a 0%,
+        #0f172a 7%,
+        transparent 10%,
+        transparent 12%,
+        #0f172a 16%
+    );
+    --rainbow: repeating-linear-gradient(
+        100deg,
+        #60a5fa 10%,
+        #e879f9 15%,
+        #60a5fa 20%,
+        #5eead4 25%,
+        #60a5fa 30%
+    );
+    background-image: var(--stripesDark), var(--rainbow);
+    
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+
+    filter: blur(10px) opacity(50%) saturate(200%);
+
+    mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+
+    pointer-events: none;
+}
+
+.jumbo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--stripes), var(--rainbow);
+    background-size: 200%, 100%;
+    animation: jumbo 60s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+}
+
+.dark .jumbo {
+    background-image: var(--stripesDark), var(--rainbow);
+    filter: blur(10px) opacity(50%) saturate(200%);
+}
+.dark .jumbo::after {
+    background-image: var(--stripesDark), var(--rainbow);
+}
