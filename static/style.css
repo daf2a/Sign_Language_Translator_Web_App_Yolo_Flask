@@ -17,15 +17,14 @@ body {
 /* * Local selectors */
 #container {
     width: 100%;
-    height: 450px;
-    border: 5px #1C2637 solid;
+    height: 586px;
+    border: 8px #1C2637 solid;
     background-color: #0F172A;
-    margin: 20px;
     border-radius: 5px;
 }
 
 #videoElement {
-    height: 440px;
+    height: 570px;
     width: 100%;
     background-color: #0F172A;
 
@@ -35,15 +34,13 @@ body {
 }
 
 #terminal {
-        border-radius: 5px;
+    border-radius: 5px;
     border: 5px #1C2637 solid;
     font-family: monospace;
     font-size: 12px;
     background-color: #0F172A;
-    height: 250px;
+    height: 490px;
     overflow-y: scroll;
-    margin: 20px;
-    padding: 10px;
 }
 
 #control {

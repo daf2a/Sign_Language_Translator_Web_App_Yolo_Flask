@@ -7,7 +7,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BISINDO Translator</title>
+    <title>Live Object Detection</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.js"></script>
@@ -47,17 +47,27 @@
 
 </head>
 <body class="bg-slate-900">
-    <div class="grid grid-cols-12 gap-4 mx-8 mt-8">
-        <!-- Controls -->
-        <div class="col-span-2 ml-4">
-            <h2 class="border-b border-slate-800 py-4 mb-5 text-3xl font-bold leading-none tracking-tight md:text-4xl lg:text-4xl text-cyan-100 ">Controls</h1>
-            <div class="border-b border-slate-800">
+    <div class="grid grid-cols-12 gap-4 m-8">
+        <div class="col-span-6">
+            <div class="container1" style="text-align: center;">
+                <div id="container">
+                    <img class="center" src="/video_feed" id="videoElement">
+                </div>
+            </div>
+            <div id="terminal" class="w-full"></div>
+        </div>
+        <div class="col-span-6 mx-2">
+            <div class="flex justify-between border-b border-gray-700 py-4 mt-10 mx-8 mb-4 ">
+                <h2 class="text-3xl font-bold leading-none tracking-tight md:text-4xl lg:text-5xl text-cyan-500 ">Video Stream</h1>
+                <button class="text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-4 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800" id="stop-button" type="button" onclick="stopProcess('Stop Request')">Back to Homepage</button>
+            </div>
+            <div class="mx-8 border-b border-gray-700">
                 <div class="flex gap-3 mb-4">
                     <label class="switch">
                         <input id="turn_off" value="1" name="turn_off" type="checkbox" onclick="toggleOffSwitch()"/>
                         <span class="slider round"></span>
                     </label>
-                    <label for="turn_off" class="form-label text-cyan-500">Show Video</label><br>
+                    <label for="turn_off" class="form-label text-cyan-500">Show Stream</label><br>
                 </div>
                 <div class="flex gap-3 mb-4">
                     <label class="switch">
@@ -67,47 +77,36 @@
                     </label>
                     <label for="run_detection" class="form-label text-cyan-500">Run Detection</label><br>
                 </div>
-                <div class="flex gap-3 mb-5">
+                <div class="flex gap-3 mb-4">
                     <label class="switch">
                         <input id="flip-horizontal" value="0" name="flip-horizontal" type="checkbox"
                                onclick="toggleHSwitch()"/>
                         <span class="slider round"></span>
                     </label>
-                    <label for="flip-horizontal" class="form-label text-cyan-500">Flip Video</label><br>
+                    <label for="flip-horizontal" class="form-label text-cyan-500">Flip Horizontally</label><br>
                 </div>
             </div>
-            <div class="gap-3 py-5 text-center border-b border-slate-800 mb-4">
-                <form action="/" method="POST" style="text-align: center;" class="mb-4" >
+
+            <div class="mx-8 flex items-center content-center gap-3 justify-between py-4">
+                <form action="/" method="POST" style="text-align: center;" class="flex justify-between w-full">
                     <label for="slider" class="form-label text-cyan-500">Confidence Threshold</label>
                     <input type="range" id="slider" name="slider" min="50" max="100">
                 </form>
                 <input type="hidden" id="sliderValue" name="sliderValue" value="75">
-                <span class="rounded-lg py-2 px-3 bg-slate-800 text-cyan-500" id="conf_display">75</span>
+                <span class="rounded-lg py-2 px-3 bg-slate-800 mr-6 text-cyan-500" id="conf_display">75</span>
             </div>
-            <button class="text-white focus:ring-4 focus:outline-none -mt-1 font-medium rounded-lg text-sm w-full py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800" id="stop-button" type="button" onclick="stopProcess('Stop Request')">Back to Homepage</button>
-        </div>
 
-        <!-- Video -->
-        <div class="col-span-8 mx-4 mt-3">
-            <div id="container">
-                <img class="center" src="/video_feed" id="videoElement">
+            <div class="flex items-center content-start gap-4 border-b border-gray-700 py-4 mt-10 mx-8 mb-4">
+                <h2 class=" text-2xl font-semibold leading-none tracking-tight md:text-3xl lg:text-4xl text-cyan-500 ">Final Sentence</h1>
+                <span class="inline-block px-3 py-1 text-xs font-bold tracking-wide mt-2 text-gray-900 bg-blue-500 rounded-full">Collecting every 10 consecutive occurrences of the same word</span>
             </div>
-        </div>
 
-        <!-- Terminal -->
-        <div class="col-span-2 mr-4">
-            <h2 class="border-b border-slate-800 py-4 mb-4 text-3xl flex justify-end font-bold leading-none tracking-tight md:text-4xl lg:text-4xl text-cyan-100 ">Output</h1>
-            <div id="terminal" class="w-full"></div>
-        </div>
-    </div>
-    <!-- Final Senctence -->
-    <div class="flex items-center mx-12 text-center content-start gap-4 border-b border-slate-700 py-4 justify-center">
-        <span class="text-center inline-block px-3 py-1 text-xs font-bold tracking-wide text-slate-900 bg-blue-500 rounded-full">Collecting every 10 consecutive occurrences of the same word</span>
-    </div>
+            <div>
+                <p id="finalSentencePara" class="text-cyan-200 mx-8">
+                </p>
+            </div>
 
-    <div>
-        <p id="finalSentencePara" class="text-cyan-200 mt-4 text-center">
-        </p>
+        </div>
     </div>
 </body>
 </html>
