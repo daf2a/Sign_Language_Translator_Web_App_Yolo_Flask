@@ -22,7 +22,7 @@ stop_flag = False
 class VideoStreaming(object):
     def __init__(self):
         super(VideoStreaming, self).__init__()
-        print ("*********************************Video Streaming******************************")
+        print ("===== Video Streaming =====")
         self._preview = False
         self._flipH = False
         self._detect = False
