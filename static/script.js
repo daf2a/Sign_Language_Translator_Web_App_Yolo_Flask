@@ -16,6 +16,14 @@ $(document).ready(function () {
     });
 });
 
+function startCamera() {
+    var url = '0';
+    $('#urlForm').attr('action', '/index'); // Set the form action to /index
+    $('#urlForm').attr('method', 'POST'); // Set the form method to POST
+    $('#urlForm').find('#url').val(url); // Set the URL value in the form
+    $('#urlForm').submit(); // Submit the form
+}
+
 function startVideo() {
     var url = $('#url').val();
     $('#urlForm').attr('action', '/index'); // Set the form action to /index
@@ -23,25 +31,6 @@ function startVideo() {
     $('#urlForm').find('#url').val(url); // Set the URL value in the form
     $('#urlForm').submit(); // Submit the form
 }
-
-// function startVideo() {
-//     var url = $('#url').val();
-//
-//     $.ajax({
-//         url: "/index",
-//         type: "POST",
-//
-//         data: {url: url},
-//         success: function () {
-//             console.log("Video stream started successfully!");
-//
-//             location.reload();
-//         },
-//         error: function () {
-//             console.log("Error starting video stream!");
-//         }
-//     });
-// }
 
 function stopProcess(message) {
     console.log("Stop BUTTON");
@@ -56,21 +45,6 @@ function stopProcess(message) {
         })
         .catch(error => console.error(error));
 }
-
-
-// function clearTerminal() {
-//     // Get a reference to the clear button
-//     const clearButton = document.getElementById('clear-button');
-//
-//     // Add a click event listener to the clear button
-//     clearButton.addEventListener('click', function () {
-//         console.log("CLEAR BUTTON")
-//         document.getElementById('terminal').innerHTML = "";
-//     });
-//
-//     // Clear the terminal on page load
-//     document.getElementById('terminal').innerHTML = "";
-// }
 
 
 //This Code is used to Communicate b/w Client & Server via SOCKETIO
@@ -134,6 +108,23 @@ function toggleHSwitch() {
     } else {
         console.log("SWITCH OFF")
         $.getJSON("/request_flipH_switch", function (data) {
+            console.log("Switch off request sent.");
+        });
+    }
+}
+
+function toggleMediaPipeSwitch() {
+    var switchElement = $("#mediapipe");
+    var switchIsOn = switchElement.is(":checked");
+
+    if (switchIsOn) {
+        console.log("SWITCH ON")
+        $.getJSON("/request_mediapipe_switch", function (data) {
+            console.log("Switch on request sent.");
+        });
+    } else {
+        console.log("SWITCH OFF")
+        $.getJSON("/request_mediapipe_switch", function (data) {
             console.log("Switch off request sent.");
         });
     }

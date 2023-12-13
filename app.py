@@ -27,6 +27,7 @@ class VideoStreaming(object):
         self._flipH = False
         self._detect = False
         self._model = False
+        self._mediaPipe = False
         self._confidence = 75.0
         self.mp_hands = mp.solutions.hands
         self.hands = self.mp_hands.Hands()
@@ -63,12 +64,20 @@ class VideoStreaming(object):
     def detect(self, value):
         self._detect = bool(value)
 
+    @property
+    def mediaPipe(self):
+        return self._mediaPipe
+
+    @mediaPipe.setter
+    def mediaPipe(self, value):
+        self._mediaPipe = bool(value)
 
     def show(self, url):
         print(url)
         self._preview = False
         self._flipH = False
         self._detect = False
+        self._mediaPipe = False
 
         self._confidence = 75.0
         ydl_opts = {
@@ -101,29 +110,6 @@ class VideoStreaming(object):
                     break
                 if self.flipH:
                     frame = cv2.flip(frame, 1)
-                # if self.detect:
-                #     print(self._confidence)
-
-                #     # frame = cv2.cvtColor(snap, cv2.COLOR_BGR2RGB)
-                #     # frame = cv2.resize(frame, (500,500
-                #     # ))
-                #     # Detect objects
-                #     results = model_object_detection.predict(frame, conf=self._confidence/100)
-
-                #     frame, labels = results[0].plot()
-                #     list_labels = []
-                #     # labels_confidences
-                #     for label in labels:
-                #         confidence = label.split(" ")[-1]
-                #         label = (label.split(" "))[:-1]
-                #         label = " ".join(label)
-                #         list_labels.append(label)
-                #         list_labels.append(confidence)
-                #         socketio.emit('label', list_labels)
-                # # frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
-                # frame = cv2.imencode(".jpg", frame)[1].tobytes()
-                # yield (b'--frame\r\n'
-                #        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
                 if self.detect:
                     frame_yolo = frame.copy()
@@ -140,6 +126,7 @@ class VideoStreaming(object):
                         list_labels.append(confidence)
                         socketio.emit('label', list_labels)
 
+                if self.mediaPipe:
                     # Convert the image to RGB for processing with MediaPipe
                     image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
                     results = self.hands.process(image)
@@ -154,9 +141,8 @@ class VideoStreaming(object):
                                 connection_drawing_spec=mp.solutions.drawing_utils.DrawingSpec(color=(255, 255, 255), thickness=2, circle_radius=2), 
                             )
 
-
                 frame = cv2.imencode(".jpg", frame)[1].tobytes()
-                yield (
+                yield ( 
                     b'--frame\r\n'
                     b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
                 )
@@ -226,6 +212,11 @@ def request_run_model_switch():
     print("*"*10, VIDEO.detect)
     return "nothing"
 
+@app.route("/request_mediapipe_switch")
+def request_mediapipe_switch():
+    VIDEO.mediaPipe = not VIDEO.mediaPipe
+    print("*"*10, VIDEO.mediaPipe)
+    return "nothing"
 
 @app.route('/update_slider_value', methods=['POST'])
 def update_slider_value():

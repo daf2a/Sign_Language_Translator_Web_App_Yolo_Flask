@@ -38,7 +38,7 @@
                   <input type="text" id="url" name="url" class="border text-white text-sm rounded-lg  block w-full p-3 bg-slate-800 border-slate-600 placeholder-slate-400 :text-white focus:ring-blue-500 focus:border-blue-50" placeholder="Enter your url link video here..." required>
               </form>
               <button id="start" type="button" onclick="startVideo()" class="text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center bg-pink-600 hover:bg-pink-700 focus:ring-pink-800">Stream</button>
-              <button id="start" type="button" onclick="startVideo()" class="text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Camera</button>
+              <button id="start" type="button" onclick="startCamera()" class="text-white  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-3 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800">Camera</button>
           </div>
         </div>
         <div class="flex gap-4 max-w-3xl mx-auto">          
@@ -53,9 +53,8 @@
                 </h2>
                 <div id="accordion-flush-body-1" class="hidden" aria-labelledby="accordion-flush-heading-1">
                   <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                    <p class="mb-1 text-gray-500 dark:text-gray-400">Put <a href="https://www.youtube.com/" class="text-blue-600 dark:text-blue-500 hover:underline">link youtube</a> video on the input bar for detection from youtube video</p>
-                    <p class="mb-2 text-gray-500 dark:text-gray-400 text-sm">Example Link BISINDO Tutorial : <span class="text-blue-600 dark:text-blue-500"> https://www.youtube.com/watch?v=mukNGgweHSI</span></p>
-                    <p class="text-gray-500 dark:text-gray-400">If you want to use camera, fill input bar with <span class="text-blue-600 dark:text-blue-500 hover:underline">'0'</span> for detection</p>
+                    <p class="mb-1 text-gray-500 dark:text-gray-400">Please input a <a href="https://www.youtube.com/" class="text-blue-600 dark:text-blue-500 hover:underline">Youtube</a> video link for stream detection OR use <span class="text-blue-600 dark:text-blue-500">Camera</span> instead</p>
+                    <p class="mb-2 text-gray-500 dark:text-gray-400 text-sm">for example: 'BISINDO Tutorial: <span class="text-blue-600 dark:text-blue-500">https://www.youtube.com/watch?v=mukNGgweHSI</span> '</p>
                   </div>
                 </div>
                 <h2 id="accordion-flush-heading-2">

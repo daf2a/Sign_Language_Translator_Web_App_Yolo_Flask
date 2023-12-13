@@ -50,7 +50,7 @@
     <div class="grid grid-cols-12 gap-4 mx-8 mt-8">
         <!-- Controls -->
         <div class="col-span-2 ml-4">
-            <h2 class="border-b border-slate-800 py-4 mb-5 text-3xl font-bold leading-none tracking-tight md:text-4xl lg:text-4xl text-cyan-100 ">Controls</h1>
+            <h2 class="border-b border-slate-800 py-4 mb-4 text-3xl font-bold leading-none tracking-tight md:text-4xl lg:text-4xl text-cyan-100 ">Controls</h1>
             <div class="border-b border-slate-800">
                 <div class="flex gap-3 mb-4">
                     <label class="switch">
@@ -67,7 +67,15 @@
                     </label>
                     <label for="run_detection" class="form-label text-cyan-500">Run Detection</label><br>
                 </div>
-                <div class="flex gap-3 mb-5">
+                <div class="flex gap-3 mb-4">
+                    <label class="switch">
+                        <input id="mediapipe" value="0" name="mediapipe" type="checkbox"
+                               onclick="toggleMediaPipeSwitch()"/>
+                        <span class="slider round"></span>
+                    </label>
+                    <label for="mediapipe" class="form-label text-cyan-500">Show Landmark</label><br>
+                </div>
+                <div class="flex gap-3 mb-4">
                     <label class="switch">
                         <input id="flip-horizontal" value="0" name="flip-horizontal" type="checkbox"
                                onclick="toggleHSwitch()"/>
@@ -76,15 +84,15 @@
                     <label for="flip-horizontal" class="form-label text-cyan-500">Flip Video</label><br>
                 </div>
             </div>
-            <div class="gap-3 py-5 text-center border-b border-slate-800 mb-4">
+            <div class="gap-3 py-4 text-center border-b border-slate-800 mb-5">
                 <form action="/" method="POST" style="text-align: center;" class="mb-4" >
                     <label for="slider" class="form-label text-cyan-500">Confidence Threshold</label>
-                    <input type="range" id="slider" name="slider" min="50" max="100">
+                    <input type="range" id="slider" name="slider" min="1" max="100">
                 </form>
                 <input type="hidden" id="sliderValue" name="sliderValue" value="75">
                 <span class="rounded-lg py-2 px-3 bg-slate-800 text-cyan-500" id="conf_display">75</span>
             </div>
-            <button class="text-white focus:ring-4 focus:outline-none -mt-1 font-medium rounded-lg text-sm w-full py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800" id="stop-button" type="button" onclick="stopProcess('Stop Request')">Back to Homepage</button>
+            <button class="text-white focus:ring-4 focus:outline-none mt-1.5 font-medium rounded-lg text-sm w-full py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800" id="stop-button" type="button" onclick="stopProcess('Stop Request')">Back to Homepage</button>
         </div>
 
         <!-- Video -->
