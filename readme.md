@@ -1,5 +1,46 @@
 # FP-RSBP BISINDO Sign Language Translator
 
+## Table of Contents
+- [Group Member](#group-member)
+- [General](#)
+  - [Description](#description)
+  - [Appoarch Method](#appoarch-method)
+  - [Visual Demo](#visual-demo)
+  - [Step by Step Method](#step-by-step-method)
+  - [Features](#features)
+  - [How to Run](#how-to-run)
+- [Training Model](#training-model)
+  - [Check GPU](#check-gpu)
+  - [Import OS](#import-os)
+  - [Yolo Instalation](#yolo-instalation)
+  - [Import Dataset Form Roboflow](#import-dataset-form-roboflow)
+  - [Training](#training)
+  - [Validate Model](#validate-model)
+  - [Inference Model](#inference-model)
+  - [Run Model on CAMERA](#run-model-on-camera)
+- [Training Result](#training-result)
+  - [Confussion Matrix](#confussion-matrix)
+  - [Result Curve](#result-curve)
+- [Create Flask Web Application](#create-flask-web-application)
+  - [Install Requirements Dependencies](#install-requirements-dependencies)
+  - [Create new app.py file for main program](#create-new-apppy-file-for-main-program)
+  - [Initialize Model](#initialize-model)
+  - [Create Function for Detection](#create-function-for-detection)
+  - [Explanation for each object](#explanation-for-each-object)
+  - [Explanation for flow of the program](#explanation-for-flow-of-the-program)
+- [Integration in HTML, CSS, and Javascript](#integration-in-html-css-and-javascript)
+  - [CSS](#in-css-file-create-a-style-for-the-stream-and-output)
+  - [JavaScript](#in-javascript-create-a-function-needed-for-the-web-interface)
+    - [For Camera or Video Button](#for-camera-or-video-button)
+    - [For Terminal Output, Socket, and Final Output](#for-terminal-output-socket-and-final-output)
+    - [For Toggle Button](#for-toggle-button)
+  - [HTML](#for-html-integrate-the-javascript-function)
+    - [For Camera and Terminal Output](#for-camera-and-terminal-output)
+    - [For Toggle Switch](#for-toggle-switch)
+    - [For Final Output](#for-final-output)
+
+
+
 ## Group Member
 
 | NRP | Name |
