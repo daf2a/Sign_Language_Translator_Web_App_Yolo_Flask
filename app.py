@@ -93,7 +93,6 @@ class VideoStreaming(object):
             
             ydl = youtube_dl.YoutubeDL(ydl_opts)
 
-            # Extract the video URL
             info = ydl.extract_info(url, download=False)
             url = info["url"]
 

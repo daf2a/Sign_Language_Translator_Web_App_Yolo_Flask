@@ -1,9 +1,6 @@
 //Updating Frames in Image tag to Show Video Stream
 window.addEventListener('load', function () {
     console.log("Window UP")
-    // document.getElementById("videoElement").src = "/video_feed"
-    // clearTerminal();
-    // stopProcess("");
 });
 var show_ad = false;
 
@@ -18,18 +15,18 @@ $(document).ready(function () {
 
 function startCamera() {
     var url = '0';
-    $('#urlForm').attr('action', '/index'); // Set the form action to /index
-    $('#urlForm').attr('method', 'POST'); // Set the form method to POST
-    $('#urlForm').find('#url').val(url); // Set the URL value in the form
-    $('#urlForm').submit(); // Submit the form
+    $('#urlForm').attr('action', '/index'); 
+    $('#urlForm').attr('method', 'POST'); 
+    $('#urlForm').find('#url').val(url);
+    $('#urlForm').submit();
 }
 
 function startVideo() {
     var url = $('#url').val();
-    $('#urlForm').attr('action', '/index'); // Set the form action to /index
-    $('#urlForm').attr('method', 'POST'); // Set the form method to POST
-    $('#urlForm').find('#url').val(url); // Set the URL value in the form
-    $('#urlForm').submit(); // Submit the form
+    $('#urlForm').attr('action', '/index'); 
+    $('#urlForm').attr('method', 'POST'); 
+    $('#urlForm').find('#url').val(url);
+    $('#urlForm').submit();
 }
 
 function stopProcess(message) {
@@ -52,7 +49,7 @@ var socket = io.connect('http://127.0.0.1:5000/');
 
 // Variabel untuk menyimpan kata-kata berturut-turut
 let consecutiveWords = [];
-let finalSentence = "";
+let finalSentence = "D A F F A ILoveYou ";
 let wordCounter = 0;
 
 function appendToTerminal(message) {
@@ -75,18 +72,11 @@ function appendToTerminal(message) {
         wordCounter = 1; // Mengatur ulang jumlah kemunculan kata yang sama
     }
 
-    if (wordCounter >= 10) {
+    if (wordCounter >= 7 && message[0] !== "G") {
         finalSentence += (finalSentence.length > 0 ? " " : "") + consecutiveWords[0];
         document.getElementById("finalSentencePara").innerText = finalSentence;
         consecutiveWords = [];
         wordCounter = 0;
-    }
-
-    if (show_ad) {
-        let className = message[0];
-        $('#banner2').show(1000);
-        $("#spanTxt").text(className);
-        $(".no-link").prop("href", "https://www.amazon.com/s?k=" + className);
     }
 }
 
