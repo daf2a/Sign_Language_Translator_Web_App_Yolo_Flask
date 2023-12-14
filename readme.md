@@ -43,11 +43,11 @@
 
 ## Group Member
 
-| NRP | Name |
-| --- | --- |
-| 5025211015 | Muhammad Daffa Ashdaqfillah |
-| 5025211015 | Ulima Kultsum |
-| 5025211015 | Nur Azizah |
+| NRP | Name | Github Account |
+| --- | --- | --- |
+| 5025211015 | Muhammad Daffa Ashdaqfillah | [daf2a](https://github.com/daf2a) |  
+| 5025211232 | Ulima Kultsum |  [ulimakrh](https://github.com/ulimakrh) |
+| 5025211252 | Nur Azizah |[dancingaroundthelies](https://github.com/dancingaroundthelies) |
 
 ## Description
 
