@@ -49,7 +49,7 @@ var socket = io.connect('http://127.0.0.1:5000/');
 
 // Variabel untuk menyimpan kata-kata berturut-turut
 let consecutiveWords = [];
-let finalSentence = "D A F F A ILoveYou ";
+let finalSentence = "";
 let wordCounter = 0;
 
 function appendToTerminal(message) {
